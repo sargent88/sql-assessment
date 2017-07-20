@@ -13,11 +13,11 @@ app.use(cors());
 // You need to complete the information below to connect
 // to the assessbox database on your postgres server.
 massive({
-  host: //host,
-  port: //port,
-  database: //database,
-  user: //user,
-  password: //password
+  host: 'localhost',
+  port: 5432,
+  database: 'assessbox',
+  // user: //user,
+  // password: //password
 }).then( db => {
   app.set('db', db);
 
@@ -34,7 +34,17 @@ massive({
 
 // ===== Build enpoints below ============
 
-
+app.get('/api/users', mainCtrl.getUsers);
+app.get('/api/vehicles', mainCtrl.getVehicles);
+app.post('/api/users', mainCtrl.addUser);
+app.post('/api/vehicles', mainCtrl.addVehicle);
+app.get('/api/user/:userId/vehiclecount', mainCtrl.getVehicleCount);
+app.get('/api/user/:userId/vehicle', mainCtrl.getVehicleById);
+app.get('/api/vehicle', mainCtrl.findAllVehicles);
+app.get('/api/newervehiclesbyyear', mainCtrl.getVehcielsByYear);
+app.put('/api/vehicle/:vehicleId/user/:userId', mainCtrl.changeOwner);
+app.delete('/api/user/:userId/vehicle/:vehicleId', mainCtrl.removeOwner);
+app.delete('/api/vehicle/:vehicleId', mainCtrl.removeVehicle);
 
 
 
